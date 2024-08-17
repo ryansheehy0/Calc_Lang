@@ -30,3 +30,16 @@ y = 10
 
 ## Comments
 - There is only single line comments with `//`s
+
+## Tests
+- Test1
+	- Creating variables
+	- Simple calculation with 1 digit literals
+- Test2
+	- Multi digit literals
+- Test3
+	- Using variables
+- Test4
+	- Using parenthesis and implicit multiplication
+- Test5
+	- Using comments

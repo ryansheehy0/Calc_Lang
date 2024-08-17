@@ -6,7 +6,7 @@
 
 std::vector<std::string> getInputFileLines(int argc, char *argv[]) {
 	if (argc != 2) {
-		std::cerr << "Too many argument.\n";
+		std::cerr << "Too many or too few argument.\n";
 		std::cerr << "clc <file.cl>\n";
 		exit(1);
 	}
