@@ -3,14 +3,6 @@
 #include <vector>
 #include <unordered_map>
 
-/*Order of operations
-1. Parenthesis
-2. Exponents
-3. Side by side multiplication
-4. Multiplication and Division
-5. Addition and Subtraction
-*/
-
 enum class TokenType {
 	Literal,
 	Operator
