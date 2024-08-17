@@ -1,4 +1,4 @@
-#progma once
+#pragma once
 
 #include <string>
 #include <vector>
@@ -6,7 +6,8 @@
 enum class TokenType {
 	Operation,
 	Variable,
-	Literal
+	Literal,
+	NewLine
 };
 
 struct Token {
