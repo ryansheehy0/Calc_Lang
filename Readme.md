@@ -4,14 +4,13 @@ A very simple calculator programming language used to learn how compilers work.
 
 ## Order of Operations
 
-| Order | Symbol     | Description                 |
-|-------|------------|-----------------------------|
-| 1     | `()`s      | Parenthesis                 |
-| 2     | `^`        | Exponents                   |
-| 3     | `xy`       | Implicit multiplication     |
-| 4     | `*` or `/` | Multiplication and division |
-| 5     | `+` or `-` | Addition and subtraction    |
-| 6     | `=`        | Assignment                  |
+| Symbol     | Description                 |
+|------------|-----------------------------|
+| `()`s      | Parenthesis                 |
+| `^`        | Exponents                   |
+| `*` or `/` | Multiplication and division |
+| `+` or `-` | Addition and subtraction    |
+| `=`        | Assignment                  |
 
 ## Creating variables
 - Variables are case sensitive and can only have alphabetical characters
@@ -24,12 +23,8 @@ y = 10
 ## Printing calculations
 
 ```C++
-200 / 4(x * y)
-// Outputs: 0.5
+200 / 4 * (x * y)
 ```
-
-## Comments
-- There is only single line comments with `//`s
 
 ## Tests
 - Test1
@@ -37,9 +32,33 @@ y = 10
 	- Simple calculation with 1 digit literals
 - Test2
 	- Multi digit literals
+	- Multiple outputs
 - Test3
 	- Using variables
 - Test4
-	- Using parenthesis and implicit multiplication
-- Test5
-	- Using comments
+	- Using parenthesis
+
+## Future features
+- Single line comments with `//`s
+- Implicit multiplication
+	- | `xy`       | Implicit multiplication     |
+- Printing strings with `"`s
+- More functions
+	- sqrt()
+	- % or mod()
+	- abs() or | |
+	- floor(), ceil(), trunc() for truncate
+	- log(), ln()
+	- sin(), cos(), tan()
+		- Radian versions
+		- Inverse
+		- cosh
+	- x! for factorial
+	- rand() outputs random number from 0 to 1
+- Predefined variables
+	- e, pi
+	- Maybe not. How many decimals do you guarantee?
+		- Users can redefine them
+- imports
+	- import filepath
+	- Just copies and pastes the file at that location
