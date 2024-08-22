@@ -28,6 +28,7 @@ std::vector<std::string> getInputFileLines(int argc, char *argv[]) {
 	std::vector<std::string> lines;
 	std::string line;
 	while (std::getline(inputFile, line)) {
+		line += '\n';
 		lines.push_back(line);
 	}
 
