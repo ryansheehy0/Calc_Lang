@@ -63,17 +63,11 @@ std::vector<std::string> parse(std::vector<Token> input) {
 		}
 	}
 
-	for (Token token : outputStack) {
-		std::cout << token.value << "\n";
-	}
-	std::vector<std::string> test;
-	return test;
-
-	/*
 	// Handle solveStack
 	std::vector<std::string> prints;
 	prints.push_back(solveStack[0].value);
-	*/
+
+	return prints;
 }
 
 bool isHigherPrecedence(std::string a, std::string b) {

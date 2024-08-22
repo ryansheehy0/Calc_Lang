@@ -28,6 +28,12 @@ y = 10
 
 ## Tests
 - Test1
+	- Printing one line of calculations with 1 digit literals
+- Test2
+	- Printing multiple lines of 1 digit literals
+- Test3
+	- Printing multiple lines of 1 or more digit literals
+
 	- Creating variables
 	- Simple calculation with 1 digit literals
 - Test2
@@ -40,8 +46,7 @@ y = 10
 
 ## Future features
 - Single line comments with `//`s
-- Implicit multiplication
-	- | `xy`       | Implicit multiplication     |
+- Implicit multiplication. `xy`
 - Printing strings with `"`s
 - More functions
 	- sqrt()
