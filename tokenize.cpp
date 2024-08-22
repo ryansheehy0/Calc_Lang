@@ -11,34 +11,35 @@ bool isLiteral(std::string str);
 bool isVariableInit(std::string str);
 bool isValidChar(char c);
 
-std::vector<Token> tokenize(std::vector<std::string> lines) {
-	std::vector<Token> tokens;
+std::vector<std::vector<Token>> tokenize(std::vector<std::string> lines) {
+	std::vector<std::vector<Token>> tokenLines;
 	int lineNum = 1;
 	for (std::string line : lines) {
+		std::vector<Token> tokenLine;
 		std::string buff;
 		for (char c : line) {
 			if (c == ' ') continue;
-			if (!isValidChar) {
+			if (!isValidChar(c)) {
 				std::cerr << "Unknown character " << c << " on line number " << lineNum << ".\n";
 				exit(1);
 			}
 			buff += c;
 			if (isOperation(buff)) {
-				tokens.push_back({TokenType::Operation, buff});
+				tokenLine.push_back({TokenType::Operation, buff});
 				buff.clear();
 			} else if (isLiteral(buff)) {
-				tokens.push_back({TokenType::Literal, buff});
+				tokenLine.push_back({TokenType::Literal, buff});
 				buff.clear();
 			} else if (isVariableInit(buff)) {
-				buff.pop_back();
-				tokens.push_back({TokenType::Variable, buff});
+				buff.pop_back(); // Remove the ending =s
+				tokenLine.push_back({TokenType::Variable, buff});
 				buff.clear();
 			}
 		}
-		tokens.push_back({TokenType::NewLine, "\n"});
+		tokenLines.push_back(tokenLine);
 		lineNum++;
 	}
-	return tokens;
+	return tokenLines;
 }
 
 bool isOperation(char c) {

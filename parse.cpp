@@ -7,67 +7,23 @@
 
 bool isHigherPrecedence(std::string a, std::string b);
 double calculateValue(std::string firstArg, std::string secondArg, std::string operation);
+void createOutputAndHoldingStacks(std::vector<Token> tokenLine, std::vector<Token>& outputStack, std::vector<Token>& holdingStack);
+void moveHoldingStackToOutputStack(std::vector<Token>& holdingStack, std::vector<Token>& outputStack);
+void createSolutionStack(std::vector<Token>& outputStack, std::vector<Token>& solutionStack);
 
-std::vector<std::string> parse(std::vector<Token> input) {
-	// Need to handle multiple outputs
-	/*
-- If literal put to output
-- If operator put onto holding stack if they are higher president then what's on the stack
-- If operator not higher or equal president, then put holding stack onto output until operator is of higher precedence.
-- If nothing then empty holding stack to output
-- Once input and holding stack are empty
-	- If literal put on solve stack
-	- If operator, computer the two past operators in the solve stack and put output on the solve stack.
-	*/
-	std::vector<Token> holdingStack;
-	std::vector<Token> outputStack;
-	std::vector<Token> solveStack;
+std::vector<std::string> parse(std::vector<std::vector<Token>> tokenLines) {
+	std::vector<std::string> outputLines;
+	for (std::vector<Token> tokenLine : tokenLines) {
+		std::vector<Token> holdingStack; // Used to order the precedence of the operators
+		std::vector<Token> outputStack;
+		std::vector<Token> solutionStack;
 
-	// Handle inputStack
-	for (Token inputToken : input) {
-		if (inputToken.tokenType == TokenType::Literal) {
-			outputStack.push_back(inputToken);
-			continue;
-		}
-		if (inputToken.tokenType == TokenType::Operation) {
-			while (!holdingStack.empty() && !isHigherPrecedence(inputToken.value, holdingStack.back().value)) {
-				Token lastOperation = holdingStack.back();
-				holdingStack.pop_back();
-				outputStack.push_back(lastOperation);
-			}
-			holdingStack.push_back(inputToken);
-		}
+		createOutputAndHoldingStacks(tokenLine, outputStack, holdingStack);
+		moveHoldingStackToOutputStack(holdingStack, outputStack);
+		createSolutionStack(outputStack, solutionStack);
+		outputLines.push_back(solutionStack[0].value);
 	}
-
-	// Handle holdingStack
-	while (holdingStack.size() != 0) {
-		Token lastOperation = holdingStack.back();
-		holdingStack.pop_back();
-		outputStack.push_back(lastOperation);
-	}
-
-	// Handle outputStack
-	for (Token outputToken : outputStack) {
-		if (outputToken.tokenType == TokenType::Literal) {
-			solveStack.push_back(outputToken);
-			continue;
-		}
-		if (outputToken.tokenType == TokenType::Operation) {
-			Token firstArg = solveStack[solveStack.size() - 2];
-			Token secondArg = solveStack[solveStack.size() - 1];
-			double calculation = calculateValue(firstArg.value, secondArg.value, outputToken.value);
-			solveStack.pop_back();
-			solveStack.pop_back();
-			Token calculatedToken = {TokenType::Literal, std::to_string(calculation)};
-			solveStack.push_back(calculatedToken);
-		}
-	}
-
-	// Handle solveStack
-	std::vector<std::string> prints;
-	prints.push_back(solveStack[0].value);
-
-	return prints;
+	return outputLines;
 }
 
 bool isHigherPrecedence(std::string a, std::string b) {
@@ -114,5 +70,48 @@ double calculateValue(std::string firstArg, std::string secondArg, std::string o
 	} catch (...) {
 		std::cerr << "Could not convert " + firstArg + " or " + secondArg + " to a double.\n";
 		exit(1);
+	}
+}
+
+void createOutputAndHoldingStacks(std::vector<Token> tokenLine, std::vector<Token>& outputStack, std::vector<Token>& holdingStack) {
+	for (Token token : tokenLine) {
+		if (token.tokenType == TokenType::Literal) {
+			outputStack.push_back(token);
+			continue;
+		}
+		if (token.tokenType == TokenType::Operation) {
+			while (!holdingStack.empty() && !isHigherPrecedence(token.value, holdingStack.back().value)) {
+				Token lastOperation = holdingStack.back();
+				holdingStack.pop_back();
+				outputStack.push_back(lastOperation);
+			}
+			holdingStack.push_back(token);
+		}
+	}
+}
+
+void moveHoldingStackToOutputStack(std::vector<Token>& holdingStack, std::vector<Token>& outputStack) {
+	while (!holdingStack.empty()) {
+		Token lastOperation = holdingStack.back();
+		holdingStack.pop_back();
+		outputStack.push_back(lastOperation);
+	}
+}
+
+void createSolutionStack(std::vector<Token>& outputStack, std::vector<Token>& solutionStack) {
+	for (Token outputToken : outputStack) {
+		if (outputToken.tokenType == TokenType::Literal) {
+			solutionStack.push_back(outputToken);
+			continue;
+		}
+		if (outputToken.tokenType == TokenType::Operation) {
+			Token firstArg = solutionStack[solutionStack.size() - 2];
+			Token secondArg = solutionStack[solutionStack.size() - 1];
+			double calculation = calculateValue(firstArg.value, secondArg.value, outputToken.value);
+			solutionStack.pop_back();
+			solutionStack.pop_back();
+			Token calculatedToken = {TokenType::Literal, std::to_string(calculation)};
+			solutionStack.push_back(calculatedToken);
+		}
 	}
 }

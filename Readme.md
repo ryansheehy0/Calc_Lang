@@ -34,15 +34,13 @@ y = 10
 - Test3
 	- Printing multiple lines of 1 or more digit literals
 
-	- Creating variables
-	- Simple calculation with 1 digit literals
-- Test2
-	- Multi digit literals
-	- Multiple outputs
-- Test3
-	- Using variables
-- Test4
-	- Using parenthesis
+
+- Creating variables
+- Simple calculation with 1 digit literals
+- Multi digit literals
+- Multiple outputs
+- Using variables
+- Using parenthesis
 
 ## Future features
 - Single line comments with `//`s

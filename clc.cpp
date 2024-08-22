@@ -7,8 +7,9 @@
 
 int main(int argc, char *argv[]) {
 	std::vector<std::string> lines = getInputFileLines(argc, argv);
-	std::vector<Token> tokens = tokenize(lines);
-	std::vector<std::string> outputLines = parse(tokens);
+	std::vector<std::vector<Token>> tokenLines = tokenize(lines);
+	std::vector<std::string> outputLines = parse(tokenLines);
+	// std::vector<std::vector<Token>>
 
 	for (std::string ouputLine : outputLines) {
 		std::cout << ouputLine << "\n";

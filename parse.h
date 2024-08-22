@@ -4,4 +4,4 @@
 #include <string>
 #include "tokenize.h"
 
-std::vector<std::string> parse(std::vector<Token> tokens);
+std::vector<std::string> parse(std::vector<std::vector<Token>> tokenLines);

@@ -15,4 +15,4 @@ struct Token {
 	std::string value;
 };
 
-std::vector<Token> tokenize(std::vector<std::string> lines);
+std::vector<std::vector<Token>> tokenize(std::vector<std::string> lines);
