@@ -29,6 +29,7 @@ std::vector<std::string> parse(std::vector<std::vector<Token>> tokenLines) {
 bool isHigherPrecedence(std::string a, std::string b) {
 	// Is a higher precedence than b
 	// If they are the same precedence return false
+	if (b == "(") return true;
 	if (b == "^") return false;
 	if (b == "*" || b == "/") {
 		if (a == "^") return true;
@@ -79,13 +80,29 @@ void createOutputAndHoldingStacks(std::vector<Token> tokenLine, std::vector<Toke
 			outputStack.push_back(token);
 			continue;
 		}
+
 		if (token.tokenType == TokenType::Operation) {
-			while (!holdingStack.empty() && !isHigherPrecedence(token.value, holdingStack.back().value)) {
-				Token lastOperation = holdingStack.back();
-				holdingStack.pop_back();
-				outputStack.push_back(lastOperation);
+			if (token.value == "(") {
+				holdingStack.push_back(token);
+			} else if (token.value == ")") {
+				if (holdingStack.empty()) {
+					std::cerr << "You are missing a (\n";
+					exit(1);
+				}
+				while (true) {
+					Token lastOperation = holdingStack.back();
+					holdingStack.pop_back();
+					if (lastOperation.value == "(") break;
+					outputStack.push_back(lastOperation);
+				}
+			} else {
+				while (!holdingStack.empty() && !isHigherPrecedence(token.value, holdingStack.back().value)) {
+					Token lastOperation = holdingStack.back();
+					holdingStack.pop_back();
+					outputStack.push_back(lastOperation);
+				}
+				holdingStack.push_back(token);
 			}
-			holdingStack.push_back(token);
 		}
 	}
 }

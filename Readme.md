@@ -1,6 +1,7 @@
 # Calc Lang
 A very simple calculator programming language used to learn how compilers work.
-- You can only create variables and print results.
+- Inspiration: https://www.youtube.com/watch?v=unh6aK8WMwM
+- You can only assign variables and print results.
 
 ## Order of Operations
 
@@ -32,15 +33,14 @@ y = 10
 - Test2
 	- Printing multiple lines of 1 digit literals
 - Test3
-	- Printing multiple lines of 1 or more digit literals
+	- Using multi digit literals
+- Test4
+	- Using parenthesis
 
-
-- Creating variables
-- Simple calculation with 1 digit literals
-- Multi digit literals
-- Multiple outputs
-- Using variables
-- Using parenthesis
+- Test4
+	- Assigning variables
+- Test 5
+	- Using variables
 
 ## Future features
 - Single line comments with `//`s
