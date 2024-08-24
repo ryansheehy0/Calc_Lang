@@ -9,7 +9,7 @@ void addPredefinedVariables(std::vector<std::string>& lines);
 
 int main(int argc, char *argv[]) {
 	std::vector<std::string> lines = getInputFileLines(argc, argv);
-	//addPredefinedVariables(lines);
+	addPredefinedVariables(lines);
 	std::vector<std::vector<Token>> tokenLines = tokenize(lines);
 	std::vector<std::string> outputLines = parse(tokenLines);
 

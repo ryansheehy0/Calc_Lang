@@ -15,7 +15,7 @@ bool isValidChar(char c);
 
 std::vector<std::vector<Token>> tokenize(std::vector<std::string> lines) {
 	std::vector<std::vector<Token>> tokenLines;
-	int lineNum = 1;
+	int lineNum = -1;
 	for (std::string line : lines) {
 		std::vector<Token> tokenLine;
 		std::string buff;
@@ -40,6 +40,18 @@ std::vector<std::vector<Token>> tokenize(std::vector<std::string> lines) {
 				buff.clear();
 				i--; // Tokenize the terminating character
 				continue;
+			}
+
+			if (buff == "-" && !tokenLine.empty()) {
+				Token lastToken = tokenLine[tokenLine.size() - 1];
+				if (lastToken.tokenType == TokenType::Literal || lastToken.tokenType == TokenType::Variable) {
+					// treat as a subtraction
+					tokenLine.push_back({TokenType::Operation, buff});
+					buff.clear();
+					continue;
+				}else {
+					// treat as a negative literal
+				}
 			}
 
 			if (isVariableAssignment(buff)) {
@@ -72,7 +84,6 @@ bool isOperation(std::string str) {
 		case '*':
 		case '/':
 		case '+':
-		case '-':
 			return true;
 		default:
 			return false;
@@ -82,6 +93,7 @@ bool isOperation(std::string str) {
 bool isLiteral(std::string str) {
 	for (int i = 0; i < str.size(); i++) {
 		char c = str[i];
+		if (i == 0 && c == '-') continue;
 		if (std::isdigit(c)) continue;
 		if (i > 0) return true;
 		return false;
@@ -112,8 +124,10 @@ bool isVariable(std::string str) {
 bool isValidChar(char c) {
 	if (std::isalpha(c)) return true;
 	if (std::isdigit(c)) return true;
+	if (c == '-') return true;
 	if (isOperation(std::string(1, c))) return true;
 	if (c == '=') return true;
+	if (c == '.') return true;
 	if (c == '\n') return true;
 	return false;
 }

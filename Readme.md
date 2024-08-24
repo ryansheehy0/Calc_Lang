@@ -38,9 +38,13 @@ y = 10
 	- Using parenthesis
 - Test4
 	- Assigning and using variables
-
 - Test 5
 	- Handling negative numbers
+
+- Test 6
+	- Handle decimal points
+	- Add predefined variables
+	- Adjust line numbers
 
 ## Future features
 - Predefined variables
