@@ -5,24 +5,43 @@
 #include <iostream>
 #include <cmath>
 
+struct Variable {
+	std::string name;
+	std::string value;
+};
+
 bool isHigherPrecedence(std::string a, std::string b);
 double calculateValue(std::string firstArg, std::string secondArg, std::string operation);
 void createOutputAndHoldingStacks(std::vector<Token> tokenLine, std::vector<Token>& outputStack, std::vector<Token>& holdingStack);
 void moveHoldingStackToOutputStack(std::vector<Token>& holdingStack, std::vector<Token>& outputStack);
 void createSolutionStack(std::vector<Token>& outputStack, std::vector<Token>& solutionStack);
-//bool isAlreadyVariable(std::vector<Variable> variableTable, std::string variableName);
+void replaceVarsWithLiterals(std::vector<Token>& tokenLine, std::vector<Variable>& variableTable);
+void updateVariableTable(std::vector<Variable>& variableTable, std::string variableName, std::string variableValue);
 
 std::vector<std::string> parse(std::vector<std::vector<Token>> tokenLines) {
 	std::vector<std::string> outputLines;
+	std::vector<Variable> variableTable;
 	for (std::vector<Token> tokenLine : tokenLines) {
+		bool isVariableAssignment = false;
+		std::string assignedVariableName;
 		std::vector<Token> holdingStack; // Used to order the precedence of the operators
 		std::vector<Token> outputStack;
 		std::vector<Token> solutionStack;
 
+		if (tokenLine[0].tokenType == TokenType::VariableAssignment) {
+			isVariableAssignment = true;
+			assignedVariableName = tokenLine[0].value;
+			tokenLine.erase(tokenLine.begin());
+		}
+		replaceVarsWithLiterals(tokenLine, variableTable);
 		createOutputAndHoldingStacks(tokenLine, outputStack, holdingStack);
 		moveHoldingStackToOutputStack(holdingStack, outputStack);
 		createSolutionStack(outputStack, solutionStack);
-		outputLines.push_back(solutionStack[0].value);
+		if (isVariableAssignment) {
+			updateVariableTable(variableTable, assignedVariableName, solutionStack[0].value);
+		}else {
+			outputLines.push_back(solutionStack[0].value); // Print
+		}
 	}
 	return outputLines;
 }
@@ -105,6 +124,11 @@ void createOutputAndHoldingStacks(std::vector<Token> tokenLine, std::vector<Toke
 				holdingStack.push_back(token);
 			}
 		}
+
+		if (token.tokenType == TokenType::VariableAssignment){
+			std::cerr << "Cannot assign variable " << token.value << " in that location\n";
+			exit(1);
+		}
 	}
 }
 
@@ -134,11 +158,33 @@ void createSolutionStack(std::vector<Token>& outputStack, std::vector<Token>& so
 	}
 }
 
-/*
-bool isAlreadyVariable(std::vector<Variable> variableTable, std::string variableName) {
-	for (Variable variable : variableTable) {
-		if (variable.value == variableName) return true;
+void updateVariableTable(std::vector<Variable>& variableTable, std::string variableName, std::string variableValue) {
+	for (int i = 0; i < variableTable.size(); i++) {
+		Variable variable = variableTable[i];
+		if (variable.name == variableName) {
+			variableTable[i] = {variableName, variableValue};
+		}
 	}
-	return false;
+	variableTable.push_back({variableName, variableValue});
 }
-*/
+
+void replaceVarsWithLiterals(std::vector<Token>& tokenLine, std::vector<Variable>& variableTable) {
+	for (int i = 0; i < tokenLine.size(); i++) {
+		Token token = tokenLine[i];
+		if (token.tokenType == TokenType::Variable) {
+			bool hasVar = false;
+			for (Variable variable : variableTable) {
+				if (token.value == variable.name) {
+					Token varToken = {TokenType::Literal, variable.value};
+					tokenLine[i] = varToken;
+					hasVar = true;
+					break;
+				}
+			}
+			if (!hasVar) {
+				std::cerr << "No assigned value to variable " << token.value << "\n";
+				exit(1);
+			}
+		}
+	}
+}

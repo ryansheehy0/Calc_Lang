@@ -36,10 +36,9 @@ y = 10
 	- Using multi digit literals
 - Test4
 	- Using parenthesis
-
 - Test4
 	- Assigning and using variables
-		- Make sure you can't use a variable
+
 - Test 5
 	- Handling negative numbers
 
