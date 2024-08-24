@@ -40,14 +40,12 @@ y = 10
 	- Assigning and using variables
 - Test 5
 	- Handling negative numbers
-
 - Test 6
 	- Handle decimal points
 	- Add predefined variables
 	- Adjust line numbers
 
 ## Future features
-- Predefined variables
 - Single line comments with `//`s
 - Printing strings with `"`s
 - More functions
@@ -66,9 +64,3 @@ y = 10
 	- import filepath
 	- Just copies and pastes the file at that location
 - Syntax highlighting
-
-## Probably Not
-- Implicit multiplication. `xy`
-	- Probably not. What if you have 3 variables. `x`, `y`, and `xy`? How do you know if you are doing implicit multiplication or using another variable?
-	- There is also a confusion for the order of operations
-	- Maybe have a space between them?

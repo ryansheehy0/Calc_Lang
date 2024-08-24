@@ -94,7 +94,7 @@ bool isLiteral(std::string str) {
 	for (int i = 0; i < str.size(); i++) {
 		char c = str[i];
 		if (i == 0 && c == '-') continue;
-		if (std::isdigit(c)) continue;
+		if (std::isdigit(c) || c == '.') continue;
 		if (i > 0) return true;
 		return false;
 	}
