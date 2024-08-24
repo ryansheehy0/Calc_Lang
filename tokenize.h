@@ -5,6 +5,7 @@
 
 enum class TokenType {
 	Operation,
+	VariableAssignment,
 	Variable,
 	Literal,
 	NewLine

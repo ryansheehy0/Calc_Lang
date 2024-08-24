@@ -10,6 +10,7 @@ double calculateValue(std::string firstArg, std::string secondArg, std::string o
 void createOutputAndHoldingStacks(std::vector<Token> tokenLine, std::vector<Token>& outputStack, std::vector<Token>& holdingStack);
 void moveHoldingStackToOutputStack(std::vector<Token>& holdingStack, std::vector<Token>& outputStack);
 void createSolutionStack(std::vector<Token>& outputStack, std::vector<Token>& solutionStack);
+//bool isAlreadyVariable(std::vector<Variable> variableTable, std::string variableName);
 
 std::vector<std::string> parse(std::vector<std::vector<Token>> tokenLines) {
 	std::vector<std::string> outputLines;
@@ -132,3 +133,12 @@ void createSolutionStack(std::vector<Token>& outputStack, std::vector<Token>& so
 		}
 	}
 }
+
+/*
+bool isAlreadyVariable(std::vector<Variable> variableTable, std::string variableName) {
+	for (Variable variable : variableTable) {
+		if (variable.value == variableName) return true;
+	}
+	return false;
+}
+*/

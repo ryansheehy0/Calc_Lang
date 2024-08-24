@@ -38,13 +38,14 @@ y = 10
 	- Using parenthesis
 
 - Test4
-	- Assigning variables
+	- Assigning and using variables
+		- Make sure you can't use a variable
 - Test 5
-	- Using variables
+	- Handling negative numbers
 
 ## Future features
+- Predefined variables
 - Single line comments with `//`s
-- Implicit multiplication. `xy`
 - Printing strings with `"`s
 - More functions
 	- sqrt()
@@ -58,10 +59,13 @@ y = 10
 		- cosh
 	- x! for factorial
 	- rand() outputs random number from 0 to 1
-- Predefined variables
-	- e, pi
-	- Maybe not. How many decimals do you guarantee?
-		- Users can redefine them
 - imports
 	- import filepath
 	- Just copies and pastes the file at that location
+- Syntax highlighting
+
+## Probably Not
+- Implicit multiplication. `xy`
+	- Probably not. What if you have 3 variables. `x`, `y`, and `xy`? How do you know if you are doing implicit multiplication or using another variable?
+	- There is also a confusion for the order of operations
+	- Maybe have a space between them?
