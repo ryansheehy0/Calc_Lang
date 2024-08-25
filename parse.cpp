@@ -28,6 +28,8 @@ std::vector<std::string> parse(std::vector<std::vector<Token>> tokenLines) {
 		std::vector<Token> outputStack;
 		std::vector<Token> solutionStack;
 
+		if (tokenLine.size() == 0) continue;
+
 		if (tokenLine[0].tokenType == TokenType::VariableAssignment) {
 			isVariableAssignment = true;
 			assignedVariableName = tokenLine[0].value;

@@ -28,6 +28,8 @@ std::vector<std::vector<Token>> tokenize(std::vector<std::string> lines) {
 			}
 			buff += c;
 
+			if (buff == "#") break;
+
 			if (isOperation(buff)) {
 				tokenLine.push_back({TokenType::Operation, buff});
 				buff.clear();
@@ -129,5 +131,6 @@ bool isValidChar(char c) {
 	if (c == '=') return true;
 	if (c == '.') return true;
 	if (c == '\n') return true;
+	if (c == '#') return true;
 	return false;
 }

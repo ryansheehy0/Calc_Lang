@@ -14,7 +14,7 @@ A very simple calculator programming language used to learn how compilers work.
 | `=`        | Assignment                  |
 
 ## Creating variables
-- Variables are case sensitive and can only have alphabetical characters
+Variables are case sensitive and can only have alphabetical characters
 
 ```C++
 x = 10
@@ -26,6 +26,13 @@ y = 10
 ```C++
 200 / 4 * (x * y)
 ```
+
+## Comments
+Everything after `#` is a comment
+
+## Predefined variables
+- pi = 3.141592654
+- e = 2.718281828
 
 ## Tests
 - Test1
@@ -44,9 +51,10 @@ y = 10
 	- Handle decimal points
 	- Add predefined variables
 	- Adjust line numbers
+- Test 7
+	- Add comments
 
 ## Future features
-- Single line comments with `//`s
 - Printing strings with `"`s
 - More functions
 	- sqrt()
