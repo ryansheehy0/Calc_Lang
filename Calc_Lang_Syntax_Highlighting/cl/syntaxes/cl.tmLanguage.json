@@ -1,0 +1,46 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Calc Lang",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#variables"
+		},
+		{
+			"include": "#operations"
+		},
+		{
+			"include": "#literals"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns": [{
+				"name": "comment.line.number-sign.cl",
+				"begin": "#",
+				"end": "\n"
+			}]
+		},
+		"variables": {
+			"patterns": [{
+				"name": "variable.other.cl",
+				"match": "[a-zA-Z]"
+			}]
+		},
+		"operations": {
+			"patterns": [{
+				"name": "keyword.operator.arithmetic.cl",
+				"match": "[^*\/+-=]"
+			}]
+		},
+		"literals": {
+			"patterns": [{
+				"name": "constant.numeric.cl",
+				"match": "-?\\d+"
+			}]
+		}
+	},
+	"scopeName": "source.cl"
+}

@@ -58,17 +58,31 @@ Everything after `#` is a comment
 - Printing strings with `"`s
 - More functions
 	- sqrt()
-	- % or mod()
-	- abs() or | |
+	- % for fmod in cmath
+	- abs()
 	- floor(), ceil(), trunc() for truncate
 	- log(), ln()
 	- sin(), cos(), tan()
 		- Radian versions
 		- Inverse
 		- cosh
-	- x! for factorial
-	- rand() outputs random number from 0 to 1
+	- fact() for factorial. Should support decimal numbers.
+	- rand outputs random number from 0 to 1
 - imports
 	- import filepath
 	- Just copies and pastes the file at that location
-- Syntax highlighting
+	- Need pragma once stuff. Do by default.
+
+## Syntax Highlighting
+- 10 or 11 root groups
+This is in order.
+- Comments. Green. comment.line.number-sign
+	- `#.*`
+- Variables. Light blue. variable.other.cl
+	- `[a-zA-Z]`
+- Operations. White. keyword.operator.cl
+	- `[\^\*\/\+\-\=]`
+- Literals. Light green. constant.numeric
+	- `[0123456789.-]`
+- Parenthesis. Yellow
+	- `[()]`

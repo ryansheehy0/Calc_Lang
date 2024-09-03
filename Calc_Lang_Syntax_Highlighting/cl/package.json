@@ -1,0 +1,25 @@
+{
+  "name": "cl-extension",
+  "displayName": "cl_extension",
+  "description": "A very simple calculator programming language used to learn how compilers work.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.92.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "cl",
+      "aliases": ["Calc Lang", "cl"],
+      "extensions": [".cl"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "cl",
+      "scopeName": "source.cl",
+      "path": "./syntaxes/cl.tmLanguage.json"
+    }]
+  }
+}
