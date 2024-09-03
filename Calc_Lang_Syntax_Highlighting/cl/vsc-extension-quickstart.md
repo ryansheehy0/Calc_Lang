@@ -1,3 +1,6 @@
+1. Modify syntaxes/cl.tmLanguage.json
+2. Copy and paste cl folder into ryan/.vscode/extensions
+
 # Welcome to your VS Code Extension
 
 ## What's in the folder
